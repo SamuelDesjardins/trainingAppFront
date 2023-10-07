@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TestFetchService } from './test-fetch.service';
 
 @Component({
@@ -6,8 +6,15 @@ import { TestFetchService } from './test-fetch.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  
   constructor(private testFetchService: TestFetchService){}
 
-  stringTest = this.testFetchService.getData()
+  data: any;
+  
+  ngOnInit() {
+    this.testFetchService.getData().subscribe(data => {
+      this.data = data;
+    });
+  }
 }
